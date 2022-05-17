@@ -38,7 +38,7 @@ curl --location --request POST 'http://127.0.0.1:8080/' \
     "___orca_user_email": "hidden@requires.https",
     "Barcode": "orca-scan-test",
     "Date": "2022-04-19T16:45:02.851Z",
-    "Name": Orca Scan Validation Example,
+    "Name": "Orca Scan Validation"
 }'
 ```
 
@@ -57,9 +57,9 @@ This [example](src/main//java/com/Application.java) uses the [srping boot](https
 @RequestMapping(
     value = "/", 
     method = RequestMethod.POST)
-String index(@RequestBody Map<String, Object> data)  throws Exception {
+ResponseEntity<String> index(@RequestBody Map<String, Object> data)  throws Exception {
 
-    // dubug purpose: show in console raw data received
+    // debug purpose: show in console raw data received
     System.out.println(data);
 
     // NOTE:
@@ -74,11 +74,11 @@ String index(@RequestBody Map<String, Object> data)  throws Exception {
         json.put("title", "Invalid Name");
         json.put("message", "Name cannot contain more than 20 characters");
 
-        return json.toJSONString();
+        return new ResponseEntity<>(json.toJSONString(), HttpStatus.OK);
     }
 
     // return HTTP Status 204 (No Content)
-    return "";
+    return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
 }
 ```
 
