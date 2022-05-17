@@ -36,7 +36,6 @@ public class Application {
             json.put("title", "Invalid Name");
             json.put("message", "Name cannot contain more than 20 characters");
 
-            //return json.toJSONString();
             return new ResponseEntity<>(json.toJSONString(), HttpStatus.OK);
         }
 
