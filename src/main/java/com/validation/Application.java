@@ -5,6 +5,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +19,7 @@ public class Application {
     @RequestMapping(
         value = "/", 
         method = RequestMethod.POST)
-    String index(@RequestBody Map<String, Object> data)  throws Exception {
+    ResponseEntity<String> index(@RequestBody Map<String, Object> data)  throws Exception {
 
         // dubug purpose: show in console raw data received
         System.out.println(data);
@@ -34,11 +36,11 @@ public class Application {
             json.put("title", "Invalid Name");
             json.put("message", "Name cannot contain more than 20 characters");
 
-            return json.toJSONString();
+            return new ResponseEntity<>(json.toJSONString(), HttpStatus.OK);
         }
 
         // return HTTP Status 204 (No Content)
-        return "";
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 
     public static void main(String[] args) {
