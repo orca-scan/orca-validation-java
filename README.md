@@ -77,8 +77,8 @@ ResponseEntity<String> index(@RequestBody Map<String, Object> data)  throws Exce
         return new ResponseEntity<>(json.toJSONString(), HttpStatus.OK);
     }
 
-    // return HTTP Status 204 (No Content)
-    return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+    // return HTTP Status 200 with no body
+    return new ResponseEntity<>("", HttpStatus.OK);
 }
 ```
 
